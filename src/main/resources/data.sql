@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS roles(
-    role INT PRIMARY KEY, 
+    id INT PRIMARY KEY, 
     role_name VARCHAR(25) NOT NULL 
 );
 

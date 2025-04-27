@@ -39,7 +39,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/attos-api/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/attos-api/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/attos-api/new-user").permitAll()
                         .requestMatchers(HttpMethod.POST, "/attos-api/verify-token").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
