@@ -48,4 +48,7 @@ public class Person {
 
     private Gender gender;
 
+    @Column(columnDefinition = " varchar (25) default 'Ativo' ")
+    private String status;
+
 }
