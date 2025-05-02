@@ -41,6 +41,7 @@ public class AdminUser implements CommandLineRunner {
                     var user = new User();
                     user.setUsername("admin");
                     user.setPassword(passwordEncoder.encode("@ttosAdmin!@#"));
+                    user.setEmail("contatognoatto01@gmail.com");
                     user.setRoles(Set.of(roleAdmin));
                     userRepository.save(user);
                 });

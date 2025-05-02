@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.soluctions.attos.domus.dtos.UserDto;
+import com.soluctions.attos.domus.dtos.VerifyEmail;
 import com.soluctions.attos.domus.entities.User;
 import com.soluctions.attos.domus.entities.Role.Roles;
 import com.soluctions.attos.domus.repositories.RoleRepository;
@@ -86,6 +87,24 @@ public class UserService {
             userRepository.inactiveUser(id);
         } catch (Exception e) {
             log.error("Error in inactive user: ", e);
+        }
+    }
+
+    public boolean findUserByEmail(VerifyEmail userEmail) {
+
+        try {
+            log.info(userEmail.email());
+            Integer response = userRepository.findUserByEmail(userEmail.email());
+
+            if (response > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            log.error("Error in find user by e-mail: ", e);
+            return false;
         }
     }
 

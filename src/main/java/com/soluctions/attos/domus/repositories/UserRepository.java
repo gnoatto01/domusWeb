@@ -15,4 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = " update users u set status = 'Inactive' where u.id = :id ", nativeQuery = true)
     void inactiveUser(@Param("id") Long id);
+
+    @Query(value = " select count(*) from users u where u.email = :email ", nativeQuery = true)
+    Integer findUserByEmail(String email); 
 }

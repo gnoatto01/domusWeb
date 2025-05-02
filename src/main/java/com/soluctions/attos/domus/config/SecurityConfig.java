@@ -46,6 +46,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/attos-api/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/attos-api/new-user").permitAll()
                         .requestMatchers(HttpMethod.POST, "/attos-api/verify-token").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/attos-api/verify-email").permitAll() 
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))

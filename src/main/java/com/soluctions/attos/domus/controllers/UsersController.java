@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soluctions.attos.domus.dtos.UserDto;
+import com.soluctions.attos.domus.dtos.VerifyEmail;
 import com.soluctions.attos.domus.entities.User;
 import com.soluctions.attos.domus.services.UserService;
 
@@ -72,6 +73,19 @@ public class UsersController {
 
         } catch (Exception e) {
             log.error("Error in controller, inactive user: ", e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PostMapping("/verify-email")
+    public ResponseEntity<Boolean> verifyUserEmail(@RequestBody VerifyEmail userEmail) {
+        try {
+            boolean isExistingEmail = userService.findUserByEmail(userEmail);
+
+            return ResponseEntity.ok(isExistingEmail);
+
+        } catch (Exception e) {
+            log.error("Error in controller verify user email: ", e);
             return ResponseEntity.internalServerError().build();
         }
     }
