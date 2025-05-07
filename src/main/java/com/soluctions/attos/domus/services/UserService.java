@@ -66,7 +66,7 @@ public class UserService {
 
     }
 
-    // TODO: Adicionar o token para rotas de inativar usario e dar update
+    // FIXME: Adicionar o token para rotas de inativar usario e dar update
 
     public void updateUser(UserDto userDto) {
         try {
@@ -107,5 +107,7 @@ public class UserService {
             return false;
         }
     }
+
+    // TODO:Criar metodo para gerar codigo de redefinicao de senha
 
 }
