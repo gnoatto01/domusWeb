@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.soluctions.attos.domus.exceptions.ResourceNotFound;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class UserService {
             log.error("Error in find users: ", e);
             return null;
         }
+    }
+
+    public User findById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFound("user id: " + id + " not found"));
+        return  user;
     }
 
     public void newUser(UserDto userDto) {
@@ -93,7 +99,7 @@ public class UserService {
     public boolean findUserByEmail(VerifyEmail userEmail) {
 
         try {
-            log.info(userEmail.email());
+
             Integer response = userRepository.findUserByEmail(userEmail.email());
 
             if (response > 0) {

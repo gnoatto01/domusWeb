@@ -25,13 +25,13 @@ import lombok.extern.slf4j.Slf4j;
 public class PersonsController {
     private final PersonService personService;
 
-    @GetMapping("/list-persons")
+    @GetMapping("/find-persons")
     public ResponseEntity<List<Person>> listAllPersons() {
 
         List<Person> personsList = new ArrayList<>();
 
         try {
-            personsList = personService.listAllPersons();
+            personsList = personService.findAllPersons();
 
             return ResponseEntity.ok(personsList);
 
@@ -41,12 +41,12 @@ public class PersonsController {
         }
     }
 
-    @GetMapping("/list-person/{id}")
+    @GetMapping("/find-person/{id}")
     public ResponseEntity<Person> listPersonById(@PathVariable("id") Long id) {
         try {
-            var person = personService.listById(id);
+            Person person = personService.findById(id);
 
-            return ResponseEntity.ok(person.get());
+            return ResponseEntity.ok(person);
 
         } catch (Exception e) {
             log.error("Error in controller, list person by id: ", e);

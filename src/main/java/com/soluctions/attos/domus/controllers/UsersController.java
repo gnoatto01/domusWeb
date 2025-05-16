@@ -41,6 +41,14 @@ public class UsersController {
         }
     }
 
+    @GetMapping("/find-user/{id}")
+    public ResponseEntity<User> findUserById(@PathVariable("id") Long id) {
+
+        User user = userService.findById(id);
+
+        return  ResponseEntity.ok(user);
+    }
+
     @PostMapping("/new-user")
     public ResponseEntity<Void> createNewUser(@RequestBody UserDto userDto) {
         try {

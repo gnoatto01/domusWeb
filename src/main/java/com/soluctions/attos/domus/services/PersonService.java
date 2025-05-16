@@ -8,6 +8,7 @@ import java.util.Set;
 import com.soluctions.attos.domus.entities.Address;
 import com.soluctions.attos.domus.entities.Role.Roles;
 import com.soluctions.attos.domus.entities.User;
+import com.soluctions.attos.domus.exceptions.ResourceNotFound;
 import com.soluctions.attos.domus.repositories.AddressRepository;
 import com.soluctions.attos.domus.repositories.RoleRepository;
 import com.soluctions.attos.domus.repositories.UserRepository;
@@ -34,7 +35,7 @@ public class PersonService {
     private final BCryptPasswordEncoder passwordEncoder;
 
 
-    public List<Person> listAllPersons() {
+    public List<Person> findAllPersons() {
         List<Person> personList = new ArrayList<>();
 
         try {
@@ -48,9 +49,9 @@ public class PersonService {
         }
     }
 
-    public Optional<Person> listById(Long id) {
+    public Person findById(Long id) {
         try {
-            var person = personRepository.findById(id);
+            Person person = personRepository.findById(id).orElseThrow(() -> new ResourceNotFound("person id: " + id + " not found"));
 
             return person;
 
@@ -60,7 +61,6 @@ public class PersonService {
         }
     }
 
-    //TODO: usar o cascade type para salvar (fazer relacionamento bilateral)
     public void newPerson(PersonDto personDto) {
         try {
             var personInDb = personRepository.findByCpf(personDto.cpf());
